@@ -29,7 +29,21 @@ pipeline {
         stage('Check kubectl') {
             steps {
                 sh 'kubectl version --client'
-                sh 'kubectl config current-context' // What is our kubectl context?
+
+                // Set kubectl context to docker-desktop if not already set
+                script {
+                    def context = sh(
+                        script: 'kubectl config current-context || echo "none"',
+                        returnStdout: true
+                    ).trim()
+
+                    if (context == 'none' || context == '') {
+                        echo "No context set — switching to docker-desktop"
+                        sh 'kubectl config use-context docker-desktop'
+                    } else {
+                        echo "Current context is: ${context}"
+                    }
+                }
             }
         }
         stage('Source'){
