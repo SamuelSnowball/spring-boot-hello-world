@@ -9,6 +9,9 @@ pipeline {
     environment {
         HELM_HOME = "/var/jenkins_home/bin"
         PATH = "${HELM_HOME}:${env.PATH}"
+
+        KUBECTL_HOME = tool name: 'kubectl'
+        PATH = "${KUBECTL_HOME}/bin:${env.PATH}"
     }
     stages {
         stage('Check Helm') {
