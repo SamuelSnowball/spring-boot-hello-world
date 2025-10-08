@@ -43,6 +43,23 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.15.0</version> <!-- Use latest stable version -->
+            <executions>
+                <execution>
+                    <phase>verify</phase> <!-- Hook into the build lifecycle -->
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <failOnViolation>true</failOnViolation>
+            </configuration>
+        </plugin>
+
         </plugins>
     </build>
 
