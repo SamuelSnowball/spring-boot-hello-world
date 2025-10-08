@@ -8,18 +8,16 @@ pipeline {
     
     environment {
         HELM_HOME = "/var/jenkins_home/bin"
-        KUBECTL_HOME = tool name: 'kubectl'
-        PATH = "${KUBECTL_HOME}/bin:${HELM_HOME}:${env.PATH}"
+        PATH = "${HELM_HOME}:${env.PATH}"
     }
     stages {
 
         stage('Install kubectl') {
             steps {
                 sh '''
-                mkdir -p "$HOME/bin"
                 curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                 chmod +x kubectl
-                mv kubectl "$HOME/bin/kubectl"
+                mv kubectl "/var/jenkins_home/bin/kubectl"
                 '''
             }
         }
