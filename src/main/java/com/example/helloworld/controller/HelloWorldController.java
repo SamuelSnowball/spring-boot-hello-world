@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
+    
+    private String x; // Should fail PMD
 
     @GetMapping("/hello")
     public String sendGreetings() {
