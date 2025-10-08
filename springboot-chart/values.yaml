@@ -1,0 +1,4 @@
+image:
+  repository: hello-world-spring # No repository prefix
+  tag: latest
+  pullPolicy: Never # Don't try and pull from anywhere, as the image is local
