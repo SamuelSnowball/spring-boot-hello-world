@@ -12,15 +12,16 @@ pipeline {
     }
     stages {
 
-        stage('Install kubectl') {
-            steps {
-                sh '''
-                curl -LO https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl
-                chmod +x kubectl
-                mv kubectl "/var/jenkins_home/bin/kubectl"
-                '''
-            }
-        }
+        // Kubectl binary is mounted in from docker run command 
+        // stage('Install kubectl') {
+        //     steps {
+        //         sh '''
+        //         curl -LO https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl
+        //         chmod +x kubectl
+        //         mv kubectl "/var/jenkins_home/bin/kubectl"
+        //         '''
+        //     }
+        // }
         stage('Check Helm') {
             steps {
                 sh 'helm version'
@@ -33,7 +34,7 @@ pipeline {
                 // Set kubectl context to kind-my-cluster if not already set
                 script {
                     sh 'kubectl config get-contexts' // What do we have avaliable?
-                    
+
                     def context = sh(
                         script: 'kubectl config current-context || echo "none"',
                         returnStdout: true
