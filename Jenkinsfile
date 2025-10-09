@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh 'kubectl version --client'
 
-                // Set kubectl context to docker-desktop if not already set
+                // Set kubectl context to kind-my-cluster if not already set
                 script {
                     def context = sh(
                         script: 'kubectl config current-context || echo "none"',
@@ -38,8 +38,8 @@ pipeline {
                     ).trim()
 
                     if (context == 'none' || context == '') {
-                        echo "No context set — switching to docker-desktop"
-                        sh 'kubectl config use-context docker-desktop'
+                        echo "No context set — switching to kind-my-cluster"
+                        sh 'kubectl config use-context kind-my-cluster'
                     } else {
                         echo "Current context is: ${context}"
                     }
