@@ -32,6 +32,8 @@ pipeline {
 
                 // Set kubectl context to kind-my-cluster if not already set
                 script {
+                    sh 'kubectl config get-contexts' // What do we have avaliable?
+                    
                     def context = sh(
                         script: 'kubectl config current-context || echo "none"',
                         returnStdout: true
